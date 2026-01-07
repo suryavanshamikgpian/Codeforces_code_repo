@@ -1,55 +1,76 @@
-//{ Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
-int counter(string s , char A){
-    int count=0 ; 
-    for(int i =0 ; i<s.length() ;i++){
-        if(s[i]==A){
-            count++;
-        }
-    }
-    return count;
-}
-int main(){
-    int t ; 
-    cin>>t ; 
+typedef long long ll;
 
-    while(t--){
-        int n ; 
-        cin>>n;
-        string str; 
-        cin>>str ; 
-        int a = counter(str, 'A');
-        int b = counter(str, 'B');
-        int c = counter(str, 'C');
-        int d = counter(str, 'D');
-        int les = counter(str, '?');
-        int marks = 0;
-        if(a<=n){
-            marks += a ;
+long long minMoves(vector<int> &balance)
+{
+    bool no_neg = false;
+    ll n = balance.size();
+    ll b = 0;
+    ll ind = 0;
+    for (ll i = 0; i < n; i++)
+    {
+        if (balance[i] < 0)
+        {
+            ind = i;
+            no_neg = true;
         }
-        else{
-            marks+= n ; 
-        }
-        if(b<=n){
-            marks += b ;
-        }
-        else{
-            marks+= n ; 
-        }
-        if(c<=n){
-            marks += c ;
-        }
-        else{
-            marks+= n ; 
-        }
-        if(d<=n){
-            marks += d ;
-        }
-        else{
-            marks+= n ; 
-        }
-        cout<<marks<<endl; 
+
+        b += balance[i];
     }
-    return 0; 
+    if (!no_neg)
+    {
+        return 0;
+    }
+    if (b < 0)
+    {
+        return -1;
+    }
+    ll score = 0;
+    ll l = ((ind - 1) + 7) % 7;
+    ll r = ((ind + 1) + 7) % 7;
+    ll gj = 0;
+    while (balance[ind] < 0)
+    {
+        while (balance[ind] < 0 && balance[r] > 0)
+        {
+            balance[ind]++;
+            balance[r]--;
+            score++;
+        }
+        gj++;
+        r = ((ind + 1 + gj) + n) % n;
+
+        while (balance[ind] < 0 && balance[l] > 0)
+        {
+            balance[ind]++;
+            balance[l]--;
+            score++;
+        }
+        l = ((ind - 1 - gj) + n) % n;
+    }
+    return score;
+}
+void solve()
+{
+    ll n;
+    cin >> n;
+    vector<int> balance(n);
+    for (ll i = 0; i < n; i++)
+    {
+        cin >> balance[i];
+    }
+    cout << minMoves(balance) << "\n";
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+
+    ll t;
+    cin >> t;
+    while (t--)
+        solve();
 }

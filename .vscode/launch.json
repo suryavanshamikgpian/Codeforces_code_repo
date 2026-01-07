@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/suryavanshamsahoo/Codeforces_code_repo",
+      "program": "/Users/suryavanshamsahoo/Codeforces_code_repo/build/Debug/outDebug"
+    }
+  ]
+}
