@@ -1,67 +1,55 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define int long long
-
-bool check(vector<vector<int>> &v, int l, int r, int k)
+using ll = long long;
+bool check(vector<vector<ll>> &v, ll l, ll r, ll k)
 {
-    int val = 0;
-
-    for (int j = 30; j >= 0; j--)
+    ll val = 0;
+    for (ll i = 30; i >= 0; i--)
     {
-        int ones = v[r][j] - v[l - 1][j];
-
-        if (ones == (r - l + 1))
-            val |= (1LL << j);
+        if (v[r][i] - v[l - 1][i] == (r - l + 1))
+        {
+            val |= (1LL << i);
+        }
     }
-
     return val >= k;
 }
 
 void solve()
 {
-    int n;
+    ll n;
     cin >> n;
-
-    vector<int> a(n + 1);
-    for (int i = 1; i <= n; i++)
-        cin >> a[i];
-
-    vector<vector<int>> v(n + 1, vector<int>(31));
-
-    for (int i = 1; i <= n; i++)
+    vector<ll> a(n + 1);
+    vector<vector<ll>> v(n + 1, vector<ll>(31, 0));
+    for (ll i = 1; i <= n; i++)
     {
-        for (int j = 0; j < 31; j++)
+        cin >> a[i];
+        for (ll j = 0; j < 31; j++)
         {
-            v[i][j] = v[i - 1][j] + ((a[i] >> j) & 1);
+            v[i][j] = v[i - 1][j] + (a[i] >> (j) & 1);
         }
     }
-
-    int q;
+    ll q;
     cin >> q;
-
     while (q--)
     {
-        int l, k;
+        ll l, k;
         cin >> l >> k;
-
-        int lo = l, hi = n, ans = -1;
-
+        ll ans = -1, lo = l, hi = n;
         while (lo <= hi)
         {
-            int mid = (lo + hi) / 2;
-
-            if (check(v, l, mid, k))
+            ll mid = lo + (hi - lo) / 2;
+            if (check(v, lo, mid, k))
             {
                 ans = mid;
                 lo = mid + 1;
             }
             else
+            {
                 hi = mid - 1;
+            }
         }
-
         cout << ans << " ";
     }
-
     cout << "\n";
 }
 
