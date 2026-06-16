@@ -4,15 +4,18 @@ typedef long long ll;
 
 void solve()
 {
-    ll n;
-    cin >> n;
-    vector<ll> a(n);
-    cin >> a[0];
-    ll zor = a[0];
-    for (ll i = 1; i < n; ++i)
+    ll n, a, b;
+    cin >> n >> a >> b;
+    if (3 * a <= b)
     {
-        cin >> a[i];
-        zor = zor ^ a[i];
+        cout << n * a << "\n";
+    }
+    else
+    {
+        ll ans = (n / 3) * b;
+        ll rem = n % 3;
+        ans += min(rem * a, b);
+        cout << ans << "\n";
     }
 }
 
@@ -27,6 +30,5 @@ int main()
     {
         solve();
     }
-
     return 0;
 }

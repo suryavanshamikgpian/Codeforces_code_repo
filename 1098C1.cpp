@@ -4,29 +4,26 @@ typedef long long ll;
 
 void solve()
 {
-    ll n;
-    cin >> n;
-    vector<ll> a(n);
-    cin >> a[0];
-    ll zor = a[0];
-    for (ll i = 1; i < n; ++i)
+    ll a, n, n_a;
+    cin >> a >> n;
+    n_a = ceil(log10(a));
+    vector<ll> d(n);
+    for (ll i = 0; i < n; i++)
     {
-        cin >> a[i];
-        zor = zor ^ a[i];
+        cin >> d[i];
     }
+    ll minol = a;
 }
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-
-    int t;
+    ll t;
     cin >> t;
     while (t--)
     {
         solve();
     }
-
     return 0;
 }

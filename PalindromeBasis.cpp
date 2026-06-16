@@ -1,32 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
+int mod = 1e9 + 7;
 
 void solve()
 {
     ll n;
     cin >> n;
-    vector<ll> a(n);
-    cin >> a[0];
-    ll zor = a[0];
-    for (ll i = 1; i < n; ++i)
-    {
-        cin >> a[i];
-        zor = zor ^ a[i];
-    }
 }
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-
-    int t;
+    cout.tie(NULL);
+    ll t;
     cin >> t;
     while (t--)
     {
         solve();
     }
-
     return 0;
 }

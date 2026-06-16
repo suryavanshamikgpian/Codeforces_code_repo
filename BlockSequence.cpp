@@ -7,21 +7,28 @@ void solve()
     ll n;
     cin >> n;
     vector<ll> a(n);
-    cin >> a[0];
-    ll zor = a[0];
-    for (ll i = 1; i < n; ++i)
-    {
+    for (ll i = 0; i < n; i++)
         cin >> a[i];
-        zor = zor ^ a[i];
+
+    vector<ll> dp(n + 1);
+    dp[n] = 0;
+    for (ll i = n - 1; i >= 0; i--)
+    {
+        dp[i] = dp[i + 1] + 1;
+        ll j = i + 1 + a[i];
+        if (j <= n)
+        {
+            dp[i] = min(dp[i], dp[j]);
+        }
     }
+    cout << dp[0] << endl;
 }
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-
-    int t;
+    ll t;
     cin >> t;
     while (t--)
     {
